@@ -2220,8 +2220,8 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
 .pdf-choice .choice-radio { width: 15px; height: 15px; border: 1px solid var(--line-strong); border-radius: 50%; background: #fff; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .pdf-choice.is-selected .choice-radio { border-color: var(--navy); }
 .pdf-choice.is-selected .choice-radio::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--navy); }
-.pdf-choice .choice-en { margin-top: 3px; color: var(--muted); font-family: var(--font-doc); font-size: 10px; }
-.pdf-choice .choice-desc { margin-top: 6px; color: var(--muted); font-size: 9.5px; line-height: 1.5; }
+.pdf-choice .choice-en { display: block; margin-top: 3px; color: var(--muted); font-family: var(--font-doc); font-size: 10px; }
+.pdf-choice .choice-desc { display: block; margin-top: 6px; color: var(--muted); font-size: 9.5px; line-height: 1.5; }
 .pdf-minimal-note {
   display: flex; align-items: flex-start; gap: 9px;
   padding: 10px 11px;
@@ -2263,6 +2263,56 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
 .pdf-summary-card .ps-total { color: var(--navy); font-family: var(--font-doc); font-size: 19px; font-weight: 700; }
 .pdf-summary-rows { margin-top: 6px; color: var(--muted); font-size: 10px; line-height: 1.6; }
 .pdf-summary-rows strong { color: var(--ink-soft); }
+.pdf-scope-note {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 9.5px;
+  line-height: 1.55;
+}
+.pdf-plan-list { display: flex; flex-direction: column; gap: 6px; margin-top: 9px; }
+.pdf-plan-row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 9px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fffdf9;
+}
+.pdf-plan-row .pr-index {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 21px; height: 21px; border-radius: 50%;
+  background: var(--navy); color: #fff; font-size: 9px; font-weight: 700;
+}
+.pdf-plan-row .pr-main { min-width: 0; }
+.pdf-plan-row .pr-name { display: block; color: var(--ink-soft); font-size: 11px; font-weight: 700; overflow-wrap: anywhere; }
+.pdf-plan-row .pr-meta { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; }
+.pdf-plan-row .pr-amount { color: var(--navy); font-family: var(--font-doc); font-size: 15px; font-weight: 700; white-space: nowrap; }
+.pdf-plan-row.is-bad { border-color: #e7c4bd; background: #fff8f6; }
+.pdf-plan-row.is-bad .pr-amount { color: var(--danger); font-family: var(--font-ui); font-size: 10px; }
+.pdf-all-note {
+  margin-top: 9px;
+  padding: 8px 9px;
+  border-left: 2px solid var(--copper);
+  background: #fdf8ee;
+  color: var(--muted);
+  font-size: 9.5px;
+  line-height: 1.55;
+}
+.pdf-all-note strong { color: var(--ink-soft); }
+.badge-button {
+  border: 1px solid #e1d1b8;
+  background: #fbf5e9;
+  color: #765d3b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  min-height: 24px;
+  padding: 3px 8px;
+}
+.badge-button:hover { border-color: var(--copper); color: var(--copper-deep); }
+.comparison-export-all { white-space: nowrap; }
 .missing-en-list { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .missing-en-list li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 8px; border: 1px solid #e7d0a9; border-radius: 6px; background: #fcf7ec; color: #74521a; font-size: 10px; line-height: 1.45; }
 .missing-en-list .btn { flex: 0 0 auto; }
@@ -2641,6 +2691,22 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
   letter-spacing: .15em;
   text-transform: uppercase;
 }
+.pdf-plan-label-print {
+  display: inline-block;
+  margin-top: 2.2mm;
+  padding: 1.2mm 3mm;
+  border: .25pt solid #bfa77e;
+  border-radius: 1mm;
+  background: #fbf5e9;
+  color: #5e4728;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 8pt;
+  font-weight: 700;
+  line-height: 1.4;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 .pdf-rule {
   height: 1.2mm;
   margin: 0 14mm 7mm;
@@ -2796,6 +2862,12 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     padding: 0 !important;
     box-shadow: none !important;
     border-radius: 0 !important;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-sheet:last-child {
+    break-after: auto;
+    page-break-after: auto;
   }
   .pdf-header { padding: 12mm 13mm 5mm; }
   .pdf-rule { margin: 0 13mm 6mm; }
@@ -5347,7 +5419,8 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
           '<p class="card-sub">一份报价可包含多个物流产品（普船、快船、限时达等），每个产品独立计算；最低价方案以绿色高亮。</p>' +
         '</div>' +
         '<div class="card-actions">' +
-          '<span class="badge" id="comparisonCountBadge">0 个方案</span>' +
+          '<button type="button" class="badge badge-button" id="comparisonCountBadge" data-act="open-pdf-all" title="点击导出全部物流产品方案 PDF">0 个方案</button>' +
+          '<button type="button" class="btn small copper comparison-export-all" data-act="open-pdf-all" title="全部方案各生成一页 PDF">⤓ 导出全部方案</button>' +
           '<button type="button" class="btn small" data-act="add-plan">＋ 添加方案</button>' +
         '</div>' +
       '</div>' +
@@ -5357,7 +5430,7 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
           '<thead><tr><th>物流产品 / 方案</th><th>计费重</th><th>单价合计</th><th>总价</th><th>时效</th><th>操作</th></tr></thead>' +
           '<tbody id="comparisonBody"></tbody>' +
         '</table>' +
-        '<div class="comparison-foot" id="comparisonNote">LCL 整票计费重 = max(总实际重, 总体积重)；方案总价 = 当前物流产品各行总价（含手动总价）之和。完整预览会同时列出全部产品方案，PDF 导出当前选中的方案。</div>' +
+        '<div class="comparison-foot" id="comparisonNote">LCL 整票计费重 = max(总实际重, 总体积重)；方案总价 = 当前物流产品各行总价（含手动总价）之和。完整预览同时列出全部方案；PDF 可选择“当前方案”或“全部方案”，选择全部时每个物流产品各占一页。</div>' +
       '</div>' +
     '</section>';
   }
@@ -5723,7 +5796,7 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     if (count) count.textContent = all.length + ' 个方案';
     const note = $('#comparisonNote');
     if (note) {
-      note.textContent = 'LCL 整票计费重 = max(总实际重, 总体积重)；方案总价 = 当前物流产品各行总价（含手动总价）之和。最低价按已有有效总价高亮；完整预览同时展示全部方案。';
+      note.textContent = 'LCL 整票计费重 = max(总实际重, 总体积重)；方案总价 = 当前物流产品各行总价（含手动总价）之和。最低价按已有有效总价高亮；完整预览同时展示全部方案，PDF 可导出当前方案或全部方案。';
     }
   }
 
@@ -5920,7 +5993,7 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
           '<span>·</span>' +
           '<span>' + (lang === 'en' ? 'Current plan total: ' : '当前方案总价：') + '<strong>' + esc(amountWithSymbol(pc.total, q.currency)) + '</strong></span>' +
           '<span>·</span>' +
-          '<span>' + (lang === 'en' ? 'PDF exports the current plan' : 'PDF 按当前方案导出') + '</span>' +
+          '<span>' + (lang === 'en' ? 'PDF: current or all plans' : 'PDF：可选当前方案 / 全部方案') + '</span>' +
         '</div>' +
         '<div class="sheet-plan-legend">' + (lang === 'en' ? 'Lo Product = logistics product; Unit Price shows the range across its cargo lines; Total Amount is the plan total.' : 'Lo Product = 物流产品名称；Unit Price 显示该产品下各货物单价（多价时取区间）；Total Amount 为该方案总计。') + '</div>' +
       '</div>' +
@@ -7313,6 +7386,9 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
         break;
       case 'open-pdf':
         openPdfExportModal({ preflight: false });
+        break;
+      case 'open-pdf-all':
+        openPdfExportModal({ preflight: false, scope: 'all' });
         break;
       case 'open-preflight':
         openPdfExportModal({ preflight: true });
@@ -9757,7 +9833,8 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
      ------------------------------------------------------------------------ */
   let pdfModalEntry = null;
   const pdfView = {
-    lang: 'zh'
+    lang: 'zh',
+    scope: 'current'
   };
 
   const PDF_LABELS = {
@@ -9773,7 +9850,9 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
       total: '总价',
       currency: '币种',
       grandTotal: '总计',
-      printBtn: '打印 / 另存为中文 PDF'
+      printBtn: '打印 / 另存为中文 PDF',
+      allPrintBtn: '打印 / 另存为全部方案 PDF',
+      planLabel: '方案'
     },
     en: {
       title: 'LCL Quotation',
@@ -9787,7 +9866,9 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
       total: 'Total Amount',
       currency: 'Currency',
       grandTotal: 'Grand Total',
-      printBtn: 'Print / Save as English PDF'
+      printBtn: 'Print / Save as English PDF',
+      allPrintBtn: 'Print / Save all plans as PDF',
+      planLabel: 'Plan'
     }
   };
 
@@ -9799,6 +9880,31 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     return cnText || enText;
   }
 
+  const PDF_PLAN_EN = {
+    '普船': 'Standard Sea',
+    '快船': 'Express Sea',
+    '限时达': 'Time-Definite',
+    '特快': 'Express',
+    '空运专线': 'Air Freight Line',
+    '空运': 'Air Freight',
+    '快递': 'Courier',
+    '卡航': 'Truck-Air',
+    '铁路': 'Rail Freight',
+    '海运整柜': 'FCL Sea Freight'
+  };
+
+  function pdfPlanLabel(plan, index, lang) {
+    const fallback = lang === 'en' ? 'Plan ' + String.fromCharCode(65 + Math.max(0, index || 0)) : '方案 ' + ((index || 0) + 1);
+    if (!plan) return fallback;
+    const rawName = String(plan.name || '').trim();
+    if (lang === 'en') {
+      const safe = englishSafe(rawName);
+      if (safe) return safe;
+      return PDF_PLAN_EN[rawName.replace(/\s+/g, '')] || fallback;
+    }
+    return rawName || fallback;
+  }
+
   function asciiFilenamePart(value, fallback) {
     const cleaned = String(value == null ? '' : value)
       .replace(/[^\x20-\x7E]/g, '')
@@ -9808,13 +9914,15 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     return cleaned || fallback;
   }
 
-  function makePdfFilename(lang) {
+  function makePdfFilename(lang, scope, planCount) {
     const q = state.quote;
     const customer = pdfFreeText(q.customerCn, q.customerEn, lang) || (lang === 'en' ? 'Customer' : '客户');
+    const count = Math.max(1, Number(planCount) || 1);
+    const allScope = scope === 'all' && count > 1;
     // English PDFs and their PDF metadata must contain no CJK at all.
     const raw = lang === 'en'
-      ? 'LCL Quotation_' + asciiFilenamePart(q.quoteNo, 'No') + '_' + asciiFilenamePart(customer, 'Customer') + '_' + (q.quoteDate || todayISO()) + '_EN'
-      : 'LCL 报价单_' + (q.quoteNo || '未编号') + '_' + customer + '_' + (q.quoteDate || todayISO()) + '_中文';
+      ? 'LCL Quotation_' + asciiFilenamePart(q.quoteNo, 'No') + '_' + asciiFilenamePart(customer, 'Customer') + '_' + (q.quoteDate || todayISO()) + (allScope ? '_ALL_' + count + '_PLANS' : '') + '_EN'
+      : 'LCL 报价单_' + (q.quoteNo || '未编号') + '_' + customer + '_' + (q.quoteDate || todayISO()) + (allScope ? '_全部' + count + '个方案' : '') + '_中文';
     return String(raw)
       .replace(/[\\/:*?"<>|\r\n\t]/g, '-')
       .replace(/\s+/g, ' ')
@@ -9907,6 +10015,143 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     };
   }
 
+  function buildPdfPreflightAll(lang) {
+    const q = state.quote;
+    const errors = [];
+    const quoteIssues = {};
+    const items = [];
+    const customerError = !String(q.customerCn || q.customerEn || '').trim();
+    if (customerError) {
+      errors.push('客户名称不能为空。');
+      quoteIssues.customer = true;
+    }
+    items.push({
+      status: customerError ? 'fail' : 'pass',
+      label: '客户名称为必填',
+      detail: customerError ? '请填写客户名称（中文或英文至少一项）。' : pdfFreeText(q.customerCn, q.customerEn, lang)
+    });
+    const noError = !String(q.quoteNo || '').trim();
+    const duplicate = duplicateQuoteNoRecord();
+    if (noError) {
+      errors.push('报价单号不能为空。');
+      quoteIssues.quoteNo = true;
+    } else if (duplicate) {
+      errors.push('报价单号已存在。');
+      quoteIssues.quoteNo = true;
+    }
+    items.push({
+      status: noError || duplicate ? 'fail' : 'pass',
+      label: '报价单号与唯一性',
+      detail: noError ? '请填写报价单号，PDF 文件名需要引用单号。' : (duplicate ? '单号已存在，请修改或重新生成。' : q.quoteNo)
+    });
+    const productError = !String(q.productCn || q.productEn || '').trim();
+    if (productError) {
+      errors.push('所有方案 PDF 都需要货物类型（Goods Type）。');
+      quoteIssues.product = true;
+    }
+    items.push({
+      status: productError ? 'fail' : 'pass',
+      label: '货物类型 / Goods Type',
+      detail: productError ? 'PDF 需要货物类型字段。' : pdfFreeText(q.productCn, q.productEn, lang)
+    });
+    const authorError = !String(q.quoteByCn || q.quoteByEn || '').trim();
+    if (authorError) {
+      errors.push('所有方案 PDF 都需要报价人。');
+      quoteIssues.author = true;
+    }
+    items.push({
+      status: authorError ? 'fail' : 'pass',
+      label: '报价人',
+      detail: authorError ? 'PDF 需要报价人字段。' : pdfFreeText(q.quoteByCn, q.quoteByEn, lang)
+    });
+    const conflicts = pendingManualConflicts();
+    if (conflicts.length) {
+      errors.push('有 ' + conflicts.length + ' 行手动总价待确认。');
+    }
+    items.push({
+      status: conflicts.length ? 'fail' : 'pass',
+      label: '手动总价冲突',
+      detail: conflicts.length ? '有 ' + conflicts.length + ' 行手动总价待确认，请选择保留或恢复自动。' : '没有待确认的手动总价冲突。'
+    });
+
+    const planResults = q.plans.map(function (plan, planIndex) {
+      const calc = calcPlan(plan);
+      const planName = plan.name || '方案 ' + (planIndex + 1);
+      const issues = [];
+      if (!calc.activeRows.length) {
+        issues.push('没有有效货物行');
+      } else {
+        calc.activeRows.forEach(function (item, rowIndex) {
+          const rowErrors = rowIssues(item.row, plan, { force: true });
+          if (rowErrors.length) issues.push('第 ' + (rowIndex + 1) + ' 行：' + rowErrors[0]);
+        });
+        if (calc.validPriceRows < calc.activeRows.length) {
+          issues.push('有货物行缺少有效单价');
+        }
+        if (calc.total <= 0) issues.push('方案总价为 0');
+      }
+      issues.forEach(function (issue) {
+        errors.push('方案「' + planName + '」：' + issue);
+      });
+      items.push({
+        status: issues.length ? 'fail' : 'pass',
+        label: '方案「' + planName + '」货物与价格',
+        detail: issues.length
+          ? issues.slice(0, 2).join('；') + (issues.length > 2 ? ' 等 ' + issues.length + ' 项' : '')
+          : calc.activeRows.length + ' 行货物 · 计费重 ' + fmtWeight(calc.chargeable) + ' kg · 总计 ' + amountWithCode(calc.total, q.currency)
+      });
+      return { plan: plan, calc: calc, index: planIndex, ok: issues.length === 0, issues: issues };
+    });
+
+    const missingEn = [];
+    if (lang === 'en') {
+      const addMissing = function (value, label) {
+        const text = String(value || '').trim();
+        if (!text) missingEn.push({ label: label, reason: 'missing' });
+        else if (containsCJK(text)) missingEn.push({ label: label, reason: 'chinese' });
+      };
+      addMissing(q.customerEn, '客户名称 Customer');
+      addMissing(q.productEn, '货物类型 Goods Type');
+      addMissing(q.quoteByEn, '报价人 Quoted By');
+      planResults.forEach(function (result) {
+        result.calc.activeRows.forEach(function (item, rowIndex) {
+          addMissing(item.row.descEn, '方案「' + (result.plan.name || result.index + 1) + '」第 ' + (rowIndex + 1) + ' 行货物描述');
+        });
+      });
+    }
+    items.push({
+      status: lang === 'en' && missingEn.length ? 'fail' : 'pass',
+      label: '纯英文内容校验',
+      detail: lang !== 'en'
+        ? '中文 PDF，不要求英文值。'
+        : (missingEn.length ? '有 ' + missingEn.length + ' 个字段缺少英文或含中文，英文全部方案 PDF 将整份阻止导出。' : '所选全部方案的英文值完整，且未检测到中文字符。')
+    });
+    items.push({
+      status: state.settings.logo ? 'pass' : 'warn',
+      label: 'LOGO 品牌页眉',
+      detail: state.settings.logo ? '已使用公司 LOGO。' : '未上传 LOGO，PDF 将使用 Global Vertical 文字占位。'
+    });
+    items.push({
+      status: 'pass',
+      label: '全部方案分页 PDF',
+      detail: '每个物流产品各生成一页 A4，标题下标注方案名称；不输出地址、联系方式、备注、日期、单号、有效期、起运地、目的地等字段。'
+    });
+    const allOk = planResults.length > 0 && planResults.every(function (r) { return r.ok; });
+    const englishBlocked = lang === 'en' && missingEn.length > 0;
+    const canPrint = !errors.length && allOk && !englishBlocked;
+    return {
+      validation: { errors: errors, warnings: [] },
+      missingEn: missingEn,
+      plan: activePlan(),
+      plans: planResults,
+      calc: calcPlan(activePlan()),
+      items: items,
+      canPrint: canPrint,
+      englishBlocked: englishBlocked,
+      scope: 'all'
+    };
+  }
+
   function pdfStatusIcon(status) {
     if (status === 'pass') return '✓';
     if (status === 'warn') return '!';
@@ -9951,6 +10196,37 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     '</div>';
   }
 
+  function pdfAllSummaryHtml(info) {
+    const q = state.quote;
+    const lang = pdfView.lang;
+    return '<div class="pdf-summary-card">' +
+      '<div class="ps-top"><span class="ps-title">' + (lang === 'en' ? 'All plans' : '全部方案') + ' · ' + info.plans.length + '</span><span class="badge copper">' + (lang === 'en' ? info.plans.length + ' pages' : info.plans.length + ' 页 PDF') + '</span></div>' +
+      '<div class="pdf-plan-list">' + info.plans.map(function (result) {
+        const label = pdfPlanLabel(result.plan, result.index, lang);
+        return '<div class="pdf-plan-row ' + (result.ok ? '' : 'is-bad') + '">' +
+          '<span class="pr-index">' + (result.index + 1) + '</span>' +
+          '<div class="pr-main"><span class="pr-name">' + esc(label) + '</span><span class="pr-meta">' + result.calc.activeRows.length + (lang === 'en' ? ' price lines' : ' 行货物') + ' · ' + fmtWeight(result.calc.chargeable) + ' kg' + (result.ok ? '' : ' · ' + esc(result.issues[0])) + '</span></div>' +
+          '<span class="pr-amount">' + (result.ok ? esc(amountWithCode(result.calc.total, q.currency)) : (lang === 'en' ? 'Needs fixes' : '待修正')) + '</span>' +
+        '</div>';
+      }).join('') + '</div>' +
+      '<div class="pdf-all-note"><strong>' + (lang === 'en' ? 'One plan per page' : '每个方案独立一页') + '</strong> · ' +
+        (lang === 'en' ? 'Each page keeps its own grand total. No cross-plan total is added.' : '每个物流产品各生成一页报价，各自保留独立总计；不会把多个方案金额相加。') +
+      '</div>' +
+    '</div>';
+  }
+
+  function pdfMissingEnglishAllHtml(info) {
+    if (pdfView.lang !== 'en' || !info.missingEn.length) return '';
+    return '<div style="margin-top:12px;">' +
+      '<div class="modal-alert danger"><strong>English only：全部方案英文 PDF 不允许出现任何中文。</strong>以下字段必须填写纯英文内容。缺失或含中文字符的字段会阻止整份导出，系统不会回退中文。</div>' +
+      '<ul class="missing-en-list">' + info.missingEn.map(function (item) {
+        const reason = item.reason === 'chinese' ? '含中文' : '缺少英文';
+        return '<li><span>' + esc(item.label) + ' <span class="badge warn">' + reason + '</span></span></li>';
+      }).join('') + '</ul>' +
+      '<p class="modal-hint" style="margin-top:6px;">请切换到对应物流产品补填英文货物描述，或补齐报价级别的英文客户/货物类型/报价人。</p>' +
+    '</div>';
+  }
+
   function openPdfExportModal(options) {
     const opts = options || {};
     if (modalStack.length) {
@@ -9958,19 +10234,51 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
       closeAllModals();
     }
     pdfView.lang = state.settings.pdfLanguage === 'en' ? 'en' : 'zh';
+    pdfView.scope = opts.scope === 'all' && state.quote.plans.length > 1 ? 'all' : 'current';
     pdfModalEntry = showPdfExportModal(opts);
     return pdfModalEntry;
   }
 
   function showPdfExportModal() {
     const lang = pdfView.lang;
-    const info = buildPdfPreflight(lang);
+    const multiplePlans = state.quote.plans.length > 1;
+    const scope = pdfView.scope === 'all' && multiplePlans ? 'all' : 'current';
+    pdfView.scope = scope;
+    const isAll = scope === 'all';
+    const info = isAll ? buildPdfPreflightAll(lang) : buildPdfPreflight(lang);
     const labels = PDF_LABELS[lang];
+    const selectedCount = isAll ? state.quote.plans.length : 1;
+    const filename = makePdfFilename(lang, isAll ? 'all' : 'current', selectedCount);
+    const scopeHtml = multiplePlans
+      ? '<div class="modal-section">' +
+          '<h3 class="modal-section-title">2 · 选择导出方案范围</h3>' +
+          '<p class="modal-hint">你要导出当前选中的物流产品，还是把这份报价里的全部物流产品一起导出？选择“全部方案”后，每个物流产品各生成一页 A4，互不合并、金额不相加。</p>' +
+          '<div class="pdf-export-grid">' +
+            '<label class="pdf-choice ' + (!isAll ? 'is-selected' : '') + '">' +
+              '<input type="radio" name="pdfScopeChoice" value="current" ' + (!isAll ? 'checked' : '') + '>' +
+              '<span class="choice-top"><span class="choice-radio"></span>当前方案</span>' +
+              '<span class="choice-en">1 plan · 1 page</span>' +
+              '<span class="choice-desc">只导出当前选中的「' + esc(activePlan().name) + '」，适合只给客户发单一方案。</span>' +
+            '</label>' +
+            '<label class="pdf-choice ' + (isAll ? 'is-selected' : '') + '">' +
+              '<input type="radio" name="pdfScopeChoice" value="all" ' + (isAll ? 'checked' : '') + '>' +
+              '<span class="choice-top"><span class="choice-radio"></span>全部方案</span>' +
+              '<span class="choice-en">' + state.quote.plans.length + ' plans · ' + state.quote.plans.length + ' pages</span>' +
+              '<span class="choice-desc">把普船、快船、限时达等全部物流产品逐页导出，客户可在一份 PDF 中横向比较。</span>' +
+            '</label>' +
+          '</div>' +
+        '</div>'
+      : '';
+    const summaryNo = multiplePlans ? 3 : 2;
+    const preflightNo = multiplePlans ? 4 : 3;
+    const printLabel = isAll
+      ? (lang === 'en' ? labels.allPrintBtn + ' (' + selectedCount + ' plans)' : labels.allPrintBtn + '（' + selectedCount + ' 个方案）')
+      : labels.printBtn;
     const body =
-      '<div class="pdf-minimal-note"><span class="mini-icon">▣</span><div><strong>严格精简 PDF（默认且固定）</strong><br>只输出 LOGO 页眉、标题、客户名称、货物类型、报价人、当前方案价格明细表、币种与总计。不会包含地址、联系人、电话、邮箱、网站、日期、有效期、单号、起运地、目的地、价格条款、运输方式、承运人、类型、税费条款、预计离港、时效、报价备注或公司联系方式。</div></div>' +
+      '<div class="pdf-minimal-note"><span class="mini-icon">▣</span><div><strong>严格精简 PDF</strong><br>单方案模式只输出 LOGO 页眉、标题、客户名称、货物类型、报价人、价格明细、币种与总计；全部方案模式会为每个物流产品各生成一页，并在标题下标明方案名称用于区分。两种模式都不会包含地址、联系人、电话、邮箱、网站、日期、有效期、单号、起运地、目的地、价格条款、运输方式、承运人、类型、税费条款、预计离港、时效、报价备注或公司联系方式。</div></div>' +
       '<div class="modal-section">' +
         '<h3 class="modal-section-title">1 · 选择 PDF 语言</h3>' +
-        '<p class="modal-hint">导出前必须选择中文或英文。系统会记住本次选择作为下次默认，但仍需每次确认。</p>' +
+        '<p class="modal-hint">中文或英文。系统会记住本次选择作为下次默认，但每次导出仍需确认。</p>' +
         '<div class="pdf-export-grid">' +
           '<label class="pdf-choice ' + (lang === 'zh' ? 'is-selected' : '') + '">' +
             '<input type="radio" name="pdfLangChoice" value="zh" ' + (lang === 'zh' ? 'checked' : '') + '>' +
@@ -9986,26 +10294,29 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
           '</label>' +
         '</div>' +
       '</div>' +
+      scopeHtml +
       '<div class="modal-section">' +
-        '<h3 class="modal-section-title">2 · 当前物流产品方案</h3>' +
-        pdfSummaryCardHtml(info) +
-        '<p class="modal-hint" style="margin:8px 0 0;">PDF 只导出当前选中的物流产品方案（当前：<strong>' + esc(info.plan.name) + '</strong>）。如需导出快船、限时达等其他方案，请关闭本窗口，在“物流产品与运输方案”中点击对应标签切换，再重新导出。</p>' +
+        '<h3 class="modal-section-title">' + summaryNo + ' · ' + (isAll ? '全部方案摘要' : '当前物流产品方案') + '</h3>' +
+        (isAll ? pdfAllSummaryHtml(info) : pdfSummaryCardHtml(info)) +
+        (isAll
+          ? '<p class="modal-hint" style="margin:8px 0 0;">将按方案列表顺序输出 <strong>' + selectedCount + ' 页</strong>：' + state.quote.plans.map(function (p, i) { return (i + 1) + '. ' + esc(pdfPlanLabel(p, i, 'zh')); }).join(' · ') + '。</p>'
+          : '<p class="modal-hint" style="margin:8px 0 0;">只导出当前方案「<strong>' + esc(info.plan.name) + '</strong>」。需要三个方案一起发给客户时，可在上方范围选择“全部方案”。</p>') +
       '</div>' +
       '<div class="modal-section">' +
-        '<h3 class="modal-section-title">3 · 打印前预检清单</h3>' +
+        '<h3 class="modal-section-title">' + preflightNo + ' · 打印前预检清单</h3>' +
         pdfPreflightHtml(info) +
         (info.validation.errors.length ? '<p class="modal-hint" style="margin-top:8px;color:var(--danger);">存在阻断项，请返回表单修正后再导出。</p>' : '') +
-        pdfMissingEnglishHtml(info) +
-        '<div class="modal-alert" style="margin-top:12px;"><strong>打印操作：</strong>点击下方按钮将实际打开浏览器打印窗口。请选择<strong>“另存为 PDF”</strong>，建议关闭“页眉和页脚”，以获得只包含指定字段的 A4 精简报价单。文件名将自动设为：<code style="font-size:9.5px;background:rgba(0,0,0,.05);padding:2px 4px;border-radius:3px;">' + esc(makePdfFilename(lang)) + '</code></div>' +
+        (isAll ? pdfMissingEnglishAllHtml(info) : pdfMissingEnglishHtml(info)) +
+        '<div class="modal-alert" style="margin-top:12px;"><strong>打印操作：</strong>点击下方按钮将实际打开浏览器打印窗口。请选择<strong>“另存为 PDF”</strong>，建议关闭“页眉和页脚”。' + (isAll ? '全部方案将按顺序生成 ' + selectedCount + ' 页，逐页保存在同一个 PDF 中。' : '') + '文件名将自动设为：<code style="font-size:9.5px;background:rgba(0,0,0,.05);padding:2px 4px;border-radius:3px;">' + esc(filename) + '</code></div>' +
       '</div>';
     const footer =
-      '<span class="export-actions-note">' + (info.canPrint ? '预检通过，可打印。' : '请先修正预检中的阻断项。') + '</span>' +
+      '<span class="export-actions-note">' + (info.canPrint ? (isAll ? '全部 ' + selectedCount + ' 个方案预检通过。' : '预检通过，可打印。') : '请先修正预检中的阻断项。') + '</span>' +
       '<button type="button" class="btn" data-modal-close>取消</button>' +
-      '<button type="button" class="btn primary" id="pdfPrintButton" ' + (info.canPrint ? '' : 'disabled') + '>' + esc(labels.printBtn) + '</button>';
+      '<button type="button" class="btn primary" id="pdfPrintButton" ' + (info.canPrint ? '' : 'disabled') + '>' + esc(printLabel) + '</button>';
     pdfModalEntry = openModal({
-      title: '导出精简 PDF',
+      title: isAll ? '导出全部方案 PDF' : '导出精简 PDF',
       kicker: 'Strict PDF export',
-      subtitle: '中英双语 · 当前选中方案 · 浏览器打印并另存为 PDF',
+      subtitle: multiplePlans ? '中英双语 · 当前方案 / 全部方案 · 浏览器打印并另存为 PDF' : '中英双语 · 当前方案 · 浏览器打印并另存为 PDF',
       wide: true,
       body: body,
       footer: footer,
@@ -10020,6 +10331,14 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
             state.settings.pdfLanguage = pdfView.lang;
             state.ui.pdfLang = pdfView.lang;
             persistSettings();
+            closeModal(entry);
+            showPdfExportModal();
+          });
+        });
+        modal.querySelectorAll('input[name="pdfScopeChoice"]').forEach(function (radio) {
+          radio.addEventListener('change', function () {
+            if (!radio.checked) return;
+            pdfView.scope = radio.value === 'all' ? 'all' : 'current';
             closeModal(entry);
             showPdfExportModal();
           });
@@ -10059,9 +10378,8 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     return pdfModalEntry;
   }
 
-  function buildPdfPrintAreaHtml(lang) {
+  function buildPdfPlanSheetHtml(lang, plan, planIndex, planCount) {
     const q = state.quote;
-    const plan = activePlan();
     const calc = calcPlan(plan);
     const labels = PDF_LABELS[lang];
     const logo = currentLogo();
@@ -10081,6 +10399,11 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
         '<td class="num">' + esc(total) + '</td>' +
       '</tr>';
     }).join('');
+    const showPlanLabel = planCount > 1;
+    const planLabel = pdfPlanLabel(plan, planIndex, lang);
+    const planLabelHtml = lang === 'en'
+      ? (/^Plan [A-Z]$/.test(planLabel) ? planLabel : labels.planLabel + ': ' + planLabel)
+      : labels.planLabel + '：' + planLabel;
     return '<div class="pdf-sheet">' +
       '<div class="pdf-header">' +
         '<div class="pdf-logo-wrap">' +
@@ -10088,7 +10411,10 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
             ? '<img class="pdf-logo" src="' + escapeAttr(logo) + '" alt="">'
             : '<span class="pdf-logo-fallback">' + esc(lang === 'en' ? (String(state.settings.companyNameEn || '').trim() && !containsCJK(state.settings.companyNameEn) ? state.settings.companyNameEn : 'Global Vertical') : companyDisplayName()) + '</span>') +
         '</div>' +
-        '<div class="pdf-title-wrap"><h1 class="pdf-title">' + esc(labels.title) + '</h1></div>' +
+        '<div class="pdf-title-wrap">' +
+          '<h1 class="pdf-title">' + esc(labels.title) + '</h1>' +
+          (showPlanLabel ? '<div class="pdf-plan-label-print">' + esc(planLabelHtml) + '</div>' : '') +
+        '</div>' +
       '</div>' +
       '<div class="pdf-rule"></div>' +
       '<div class="pdf-meta">' +
@@ -10122,20 +10448,33 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     '</div>';
   }
 
+  function buildPdfPrintAreaHtml(lang, plans) {
+    const selected = Array.isArray(plans) && plans.length ? plans : [activePlan()];
+    return selected.map(function (plan, index) {
+      return buildPdfPlanSheetHtml(lang, plan, index, selected.length);
+    }).join('');
+  }
+
   function performPdfPrint() {
-    const info = buildPdfPreflight(pdfView.lang);
+    const lang = pdfView.lang;
+    const multiplePlans = state.quote.plans.length > 1;
+    const scope = pdfView.scope === 'all' && multiplePlans ? 'all' : 'current';
+    pdfView.scope = scope;
+    const plans = scope === 'all' ? state.quote.plans.slice() : [activePlan()];
+    const info = scope === 'all' ? buildPdfPreflightAll(lang) : buildPdfPreflight(lang);
     if (!info.canPrint) {
-      toast('预检未通过，暂不能导出。英文 PDF 必须全部为英文。', 'error');
+      toast(scope === 'all'
+        ? '全部方案预检未通过，暂不能导出。请修正预检清单中的方案或英文内容。'
+        : '预检未通过，暂不能导出。英文 PDF 必须全部为英文。', 'error');
       return;
     }
-    const lang = pdfView.lang;
-    const filename = makePdfFilename(lang);
+    const filename = makePdfFilename(lang, scope, plans.length);
     const printArea = document.getElementById('printArea');
     if (!printArea) {
       toast('打印区域初始化失败，请刷新页面重试。', 'error');
       return;
     }
-    const printHtml = buildPdfPrintAreaHtml(lang);
+    const printHtml = buildPdfPrintAreaHtml(lang, plans);
     if (lang === 'en') {
       const checker = document.createElement('div');
       checker.innerHTML = printHtml;
@@ -10166,7 +10505,9 @@ mark { padding: 0 1px; border-radius: 2px; background: #f0cf8e; color: inherit; 
     window.addEventListener('afterprint', restoreTitle, { once: true });
     try {
       window.print();
-      toast('打印窗口已打开。请选择“另存为 PDF”，建议关闭页眉和页脚。', 'info', 5200);
+      toast(scope === 'all'
+        ? '已生成 ' + plans.length + ' 个方案、共 ' + plans.length + ' 页。请在打印窗口选择“另存为 PDF”，并关闭页眉和页脚。'
+        : '打印窗口已打开。请选择“另存为 PDF”，建议关闭页眉和页脚。', 'info', 5600);
     } catch (err) {
       toast('浏览器打印调用失败：' + (err && err.message ? err.message : '未知错误'), 'error');
     } finally {
